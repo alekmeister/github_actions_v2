@@ -13,9 +13,6 @@ permissions:
   pages: write # разрешаем перезаписывать github page
   id-token: write # Разрешаем использовать GITHUB_TOKEN
 
-env:
-  PUBLIC_PATH: /github_actions_v2/
-
 jobs: # Секция jobs определяет этапы процесса
 
   test:
