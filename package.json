@@ -1,0 +1,59 @@
+{
+	"main": "index.js",
+	"name": "React-Vite-Starter",
+	"type": "module",
+	"version": "1.0.1",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/react": "^18.2.0",
+		"@types/react-dom": "^18.2.1",
+		"@eslint/js": "^9.39.1",
+		"eslint": "^9.39.1",
+		"eslint-plugin-react-hooks": "^7.0.1",
+		"eslint-plugin-react-refresh": "^0.4.24",
+		"typescript-eslint": "^8.48.0",
+		"@vitejs/plugin-react": "^5.1.1",
+		"autoprefixer": "^10.4.17",
+		"commitizen": "^4.3.0",
+		"cssnano": "^6.0.3",
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.2",
+		"prettier": "^2.8.8",
+		"sass": "^1.70.0",
+		"stylelint": "^15.7.0",
+		"stylelint-config-standard": "^33.0.0",
+		"stylelint-order": "^6.0.3",
+		"typescript": "^5.0.4"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"preview": "vite preview",
+		"stylelint": "stylelint \"src/**/*.css\"",
+		"stylelint:fix": "stylelint \"src/**/*.css\" --fix",
+		"lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
+		"format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --ignore-path ./.prettierignore",
+		"test": "yarn stylelint:fix && yarn lint && yarn format",
+		"prepare": "husky install",
+		"commit": "yarn test && cz"
+	},
+	"dependencies": {
+		"clsx": "^2.1.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.22.3"
+	},
+	"lint-staged": {
+		"*.{css,scss}": "yarn stylelint:fix",
+		"*.{js,jsx,ts,tsx}": "yarn lint",
+		"*.{js,jsx,ts,tsx,json,css,scss,md}": "yarn format"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"homepage": "./"
+}
+
