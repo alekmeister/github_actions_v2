@@ -18,6 +18,22 @@ env:
 
 jobs: # Секция jobs определяет этапы процесса
 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout # Шаг для получения доступа к репозиторию
+        uses: actions/checkout@v4 # Данный шаг использует готовый workflow actions/checkout@v4: он клонирует текущий коммит репозитория. Таким образом, раннеру становится доступен исходный код проекта
+      - name: Set up Node # Шаг для указания используемой версии Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Использовать будем 20-ю версию Node.js
+          cache: 'npm'
+      - name: Install dependencies # Шаг установки зависимостей
+        run: npm ci # В ключе run хранится команда, которая будет выполнена в терминале окружения на раннере
+      - name: Run test # Запускаем тесты
+        run: npm test
+
+
   deploy:  # Создаётся одна задача deploy, имя может быть любым
     runs-on: ubuntu-latest # Определяет, в каком окружении будут запущены все команды этой задачи
     steps: # Перечень шагов, команд, которые будут выполнены в этом блоке
@@ -26,7 +42,7 @@ jobs: # Секция jobs определяет этапы процесса
       - name: Set up Node # Шаг для указания используемой версии Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Использовать будем 18-ю версию Node.js
+          node-version: 20 # Использовать будем 20-ю версию Node.js
           cache: 'npm'
       - name: Install dependencies # Шаг установки зависимостей
         run: npm ci # В ключе run хранится команда, которая будет выполнена в терминале окружения на раннере.
@@ -37,6 +53,6 @@ jobs: # Секция jobs определяет этапы процесса
       - name: Upload artifact # Загружаем артефакты
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Путь до папки, где лежит сборка, в нашем случае Webpack собирает в папку dist, данные берутся из предыдущего шага Build
+          path: './dist' # Путь до папки, где лежит сборка, в нашем случае Vite собирает в папку dist, данные берутся из предыдущего шага Build
       - name: Deploy to GitHub Pages # Публикация артефактов на GitHub Pages с помощью готового actions
         uses: actions/deploy-pages@v4
